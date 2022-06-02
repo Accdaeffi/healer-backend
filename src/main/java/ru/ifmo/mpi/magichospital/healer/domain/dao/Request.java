@@ -17,7 +17,7 @@ import ru.ifmo.mpi.magichospital.healer.domain.dao.dict.RequestStatusDict;
 
 @Entity
 @Data
-@Table(name = "disease_case")
+@Table(name = "request")
 public class Request {
 	
     @Id
@@ -26,7 +26,7 @@ public class Request {
     private int id;
     
     @ManyToOne(targetEntity = Helper.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "helper_id")
     private Helper helper;
         
     @ManyToOne(targetEntity = Healer.class, fetch = FetchType.EAGER)

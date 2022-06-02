@@ -46,5 +46,8 @@ public class Healer {
     @ManyToOne(targetEntity = SocialStatus.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "social_status")
     private SocialStatus socialStatus;
+    
+	@Column(name = "login")
+	private String login;
 
 }

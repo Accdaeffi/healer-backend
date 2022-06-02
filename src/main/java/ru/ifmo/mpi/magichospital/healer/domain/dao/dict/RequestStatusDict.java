@@ -24,5 +24,9 @@ public class RequestStatusDict {
     
 	@Column(name = "code")
 	private String code;
+	
+	public static enum Statuses {
+		NEW
+	}
 
 }

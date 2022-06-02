@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import ru.ifmo.mpi.magichospital.healer.exception.NotFoundException;
 import ru.ifmo.mpi.magichospital.healer.exception.PossibleSqlInjectionAttackException;
-import ru.ifmo.mpi.magichospital.healer.exception.NoEntityWithSuchIdException;
 
 @ControllerAdvice
 public class Advicer {
@@ -26,8 +26,8 @@ public class Advicer {
     }
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NoEntityWithSuchIdException.class)
-    public ResponseEntity<Object> handleException(NoEntityWithSuchIdException e) {
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> handleException(NotFoundException e) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("message", e.getMessage());
