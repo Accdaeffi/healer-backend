@@ -1,7 +1,9 @@
 package ru.ifmo.mpi.magichospital.healer.mappers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +53,16 @@ public class RequestMapper {
 	}
 	
 	public Request fromDTO(RequestDTO dto) {
+		Helper helper = new Helper();
+		
+		if (dto.getHelperId() != 0) {
+			helper = helperRepository.findById(dto.getHelperId()).get();
+		} else {
+			List<Helper> allHelpers = helperRepository.findAll();
+			helper = allHelpers.get(new Random().nextInt(allHelpers.size()));
+		}
+		
 		Optional<Healer> optionalHealer = healerRepository.findById(dto.getHealerId());
-		Optional<Helper> optionalHelper = helperRepository.findById(dto.getHelperId());
 		
 		Request request = new Request();
 		request.setDescription(dto.getDescription());
@@ -62,6 +72,7 @@ public class RequestMapper {
 		if (dto.getRequestedResources() != null) {
 			request.setRequestedResources(
 					dto.getRequestedResources().stream()
+						.filter(requestedResource -> requestedResource.getAmount() > 0)
 	    				.map(requestedResource -> {
 	    					return requestResourceMapper.fromDTO(requestedResource).setRequest(request);
 	    				})
@@ -72,7 +83,7 @@ public class RequestMapper {
 		}
 		
 		request.setHealer(optionalHealer.get());
-		request.setHelper(optionalHelper.get());
+		request.setHelper(helper);
 		if (dto.getStatus() != null) {
 			Optional<RequestStatusDict> optionalRequestStatusDict = requestStatusRepository.findByCode(dto.getStatus());
 			request.setStatus(optionalRequestStatusDict.get());
