@@ -9,4 +9,5 @@ public class ResourceDTO {
 	
 	private String name;
 	private String code;
+	private int maxAmount;
 }

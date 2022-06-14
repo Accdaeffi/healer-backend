@@ -24,5 +24,8 @@ public class ResourceDict {
     
 	@Column(name = "code")
 	private String code;
+	
+	@Column(name = "max_in_request")
+	private int maxAmount;
 
 }

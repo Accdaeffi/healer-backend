@@ -13,6 +13,7 @@ public class ResourceMapper {
 		
 		dto.setCode(resource.getCode());
 		dto.setName(resource.getName());
+		dto.setMaxAmount(resource.getMaxAmount());
     	
     	return dto;
 	}
