@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ru.ifmo.mpi.magichospital.healer.domain.dao.LoginInfo;
+import ru.ifmo.mpi.magichospital.healer.domain.dao.dict.ResourceDict;
 
 @Repository
-public interface LoginInfoRepository extends JpaRepository<LoginInfo, String> {
-	Optional<LoginInfo> findByLogin(String login);
+public interface ResourceDictRepository extends JpaRepository<ResourceDict, Integer>{
+	Optional<ResourceDict> findByCode(String code);
 }

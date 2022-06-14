@@ -11,19 +11,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import ru.ifmo.mpi.magichospital.healer.domain.dao.dict.ResourceDict;
 
 @Entity
 @Data
-@Table(name = "order")
-public class Order {
+@Table(name = "request_resource")
+@Accessors(chain = true)
+public class RequestResource {
 	
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @ManyToOne(targetEntity = Request.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Request.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
     private Request request;
         
