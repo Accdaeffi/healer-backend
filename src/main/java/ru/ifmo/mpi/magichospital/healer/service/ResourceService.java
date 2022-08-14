@@ -15,6 +15,11 @@ public class ResourceService {
 	@Autowired
 	ResourceDictRepository resourceDictRepository;
 	
+	/**
+	 * Выдаёт список доступных ресурсов
+	 * 
+	 * @return
+	 */
 	public List<ResourceDict> getResources() {	
 		List<ResourceDict> result = new ArrayList<>();
 		resourceDictRepository.findAll().forEach(result::add);

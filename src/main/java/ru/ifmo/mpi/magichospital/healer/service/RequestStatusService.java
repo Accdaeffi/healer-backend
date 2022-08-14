@@ -15,6 +15,13 @@ public class RequestStatusService {
 	@Autowired
 	RequestStatusRepository requestStatusReporistory;
 	
+	/**
+	 * Выдаёт статус запроса по коду статуса
+	 * 
+	 * @param code
+	 * @return
+	 * @throws NotFoundException Если
+	 */
 	public RequestStatusDict getRequestStatusByCode(String code) 
 			throws NotFoundException {
 		Optional<RequestStatusDict> optionalRequestStatus = requestStatusReporistory.findByCode(code);

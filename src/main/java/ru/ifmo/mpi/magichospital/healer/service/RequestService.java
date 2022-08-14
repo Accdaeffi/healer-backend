@@ -29,8 +29,16 @@ public class RequestService {
 	@Autowired 
 	HealerService healerService;
 	
+	/**
+	 * Добавление в БД новый запрос о помощи у помощников
+	 * 
+	 * @param requestDTO Описание запроса
+	 * @param loggedHealer От чьего имени делается запрос
+	 * @return Сохранённый в БД запрос
+	 * @throws NotFoundException Если какое-то поле некорректное и соответсвующий ему объект не найден в БД
+	 */
 	public Request addRequest(RequestDTO requestDTO, String loggedHealer) 
-			throws NotFoundException, NotFoundException {
+			throws NotFoundException {
 		
 		try {
 			Healer healer = healerService.getHealerByLogin(loggedHealer);

@@ -15,6 +15,13 @@ public class HealerService {
 	@Autowired
 	HealerRepository healerRepository;
 	
+	/**
+	 * Получает целителя по id
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NotFoundException Если целителя с таким id не найдено.
+	 */
 	public Healer getHealerById(int id) 
 			throws NotFoundException {
 		
@@ -27,6 +34,13 @@ public class HealerService {
 		
 	}
 	
+	/**
+	 * Получает целителя по его логину 
+	 * 
+	 * @param login
+	 * @return
+	 * @throws NotFoundException Если целителя с таким логином не найдено
+	 */
 	public Healer getHealerByLogin(String login) 
 			throws NotFoundException {
 		Optional<Healer> optionalHealer = healerRepository.findByLogin(login);

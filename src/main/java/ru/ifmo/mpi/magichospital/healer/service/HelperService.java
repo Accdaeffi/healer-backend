@@ -20,12 +20,24 @@ public class HelperService {
 	@Autowired
 	HelperRepository helperRepository;
 	
+	/**
+	 * Выдаёт список всех помощников
+	 * 
+	 * @return
+	 */
 	public List<Helper> getHelpers() {	
 		List<Helper> result = new ArrayList<>();
 		helperRepository.findAll().forEach(result::add);
 		return result;
 	}
 
+	/**
+	 * Выдаёт список помощников по строке поиска
+	 * 
+	 * @param searchString Строка, разбивающаяся на 2 токена по первому пробелу. Осуществляется как поиск по "имя фамилия", так и "фамилия имя"
+	 * @return Список помощников, удовлетворяющий условию поиска
+	 * @throws PossibleSqlInjectionAttackException Если в строке поиска есть SQL-инъекция
+	 */
 	public List<Helper> getHelpersByName(String searchString) 
 			throws PossibleSqlInjectionAttackException {
 		String[] tokens = searchString.split(" ", 2);
@@ -44,6 +56,13 @@ public class HelperService {
 		return helperRepository.findByTokens(token1, token2);
 	}
 	
+	/**
+	 * Выдаёт целителя по id
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NotFoundException
+	 */
 	public Helper getHelperById(int id) 
 			throws NotFoundException {
 		
